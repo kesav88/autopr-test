@@ -44,9 +44,9 @@ Updated {env} ConfigMap:
 
     try:
         response = requests.post(
-            os.environ.get("OLLAMA_HOST") + "/chat",
+            os.environ.get("OLLAMA_HOST") + "/api/chat",
             json={
-                "model": os.environ.get("MODEL", "mistral"),
+                "model": os.environ.get("MODEL", "llama2"),
                 "messages": [{"role": "user", "content": prompt}]
             }
         )
