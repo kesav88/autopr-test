@@ -17,9 +17,10 @@ def write_yaml(path, data):
 
 def prompt_llm(dev_yaml, target_yaml, env):
     prompt = f"""
-You are a Kubernetes expert.
+    You are a Kubernetes expert.
 
-Here is the updated dev ConfigMap:
-```yaml
-{yaml.dump(dev_yaml)}
+    Here is the updated dev ConfigMap:
+    ```yaml
+    {yaml.dump(dev_yaml)}
+    """
 
