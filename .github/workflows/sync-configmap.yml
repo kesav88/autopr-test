@@ -1,0 +1,31 @@
+name: Sync ConfigMap Changes
+
+on:
+  pull_request:
+    paths:
+      - 'k8s/dev/configmap.yaml'
+    types: [opened, synchronize]
+
+jobs:
+  sync-configmap:
+    runs-on: self-hosted  # Runs on your EC2 self-hosted runner
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pyyaml requests
+
+      - name: Run sync script
+        run: python scripts/sync_configmap.py
+        env:
+          OLLAMA_HOST: http://localhost:11434
+          MODEL: mistral
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
